@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { createProduct, deleteProductById, getProductById, getProducts, updateProductById } from '../controllers/product.controller';
 
-const router = Router();
+const router: Router = Router();
 router.get('/', getProducts);
 router.get('/:id', getProductById);
 router.post('/', createProduct);

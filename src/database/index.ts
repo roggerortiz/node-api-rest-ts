@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import config from '../config';
 
-export const connectDB = async () => {
+export const connectDB = async (): Promise<void> => {
     try {
         await mongoose.connect(config.MONGODB_URI, {
             useNewUrlParser: true,

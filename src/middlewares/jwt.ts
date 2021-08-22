@@ -1,12 +1,20 @@
+import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import config from '../config';
 
-const unlessPaths = [
+export interface IPayload {
+    roles: string[],
+    iat?: number,
+    exp?: number,
+    sub?: string
+}
+
+const unlessPaths: string[] = [
     '/auth/signup',
     '/auth/signin'
 ]
 
-export default async (req, res, next) => {
+export default async (req: Request, res: Response, next: NextFunction) => {
     try {
         if(unlessPaths.indexOf(req.url) !== -1)
             return next();
@@ -21,7 +29,9 @@ export default async (req, res, next) => {
         if (label !== 'Bearer' || !token)
             return res.status(401).json({ message: "Unauthorized" });
 
-        req.user = jwt.verify(token, config.JWT_SECRET_KEY);
+        const payload: IPayload = jwt.verify(token, config.JWT_SECRET_KEY) as IPayload;
+
+        req['user'] = payload;
 
         return next();
 

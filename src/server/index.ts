@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Application } from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import config from '../config';
@@ -8,7 +8,7 @@ import authRoutes from '../routes/auth.routes';
 import userRoutes from '../routes/user.routes';
 import productRoutes from '../routes/product.routes';
 
-const app = express();
+const app: Application = express();
 
 // variables
 app.set('port', config.PORT);
@@ -25,7 +25,7 @@ app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/products', productRoutes);
 
-export const startServer = () => {
+export const startServer = (): void => {
     app.listen({ port: app.get('port') }, () => {
         console.log(`>> Server listen on http://localhost:${app.get('port')}`);
     });
