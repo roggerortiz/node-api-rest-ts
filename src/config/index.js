@@ -1,0 +1,8 @@
+const config = {
+    PORT: process.env.PORT || 4000,
+    JWT_SECRET_KEY: process.env.JWT_SECRET_KEY || "jwt-secret-key",
+    MONGODB_URI: process.env.MONGODB_URI || "mongodb://localhost/nodecore",
+    CORS_ORIGIN_WEB_URI: process.env.CORS_ORIGIN_WEB_URI || 'http://localhost:3000'
+};
+
+export default config;
